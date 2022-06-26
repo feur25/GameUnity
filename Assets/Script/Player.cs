@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
-    private Animation _animation;
+public class Player : MonoBehaviour {
+    
 
     public float walkSpeed = 3;
     public float runSpeed = 6;
@@ -16,14 +15,17 @@ public class Player : MonoBehaviour
     public string inputRight;
 
     public Vector3 jumpUp;
-    CapsuleCollider playerCollider;
-    Rigidbody rigidbody;
+
+    private Rigidbody rigidbody;
+    private Animation _animation;
+    private CapsuleCollider playerCollider;
+
     public bool sprinting;
 
     void Awake() {
+        rigidbody = gameObject.GetComponent<Rigidbody>();
         _animation = gameObject.GetComponent<Animation>();
         playerCollider = gameObject.GetComponent<CapsuleCollider>();
-        rigidbody = gameObject.GetComponent<Rigidbody>();
     }
     bool IsGrounded() {
         return Physics.CheckCapsule(playerCollider.bounds.center, new Vector3(playerCollider.bounds.center.x, playerCollider.bounds.min.y - 0.1f, playerCollider.bounds.center.z), 0.09f);
